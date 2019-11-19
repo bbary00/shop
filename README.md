@@ -1,2 +1,0 @@
-# shop
-ROR trainings

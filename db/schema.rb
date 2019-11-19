@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_18_215133) do
+ActiveRecord::Schema.define(version: 2019_11_19_081034) do
 
   create_table "items", force: :cascade do |t|
     t.float "price"
@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(version: 2019_11_18_215133) do
     t.float "weight"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "description"
+    t.index ["name"], name: "index_items_on_name"
+    t.index ["price"], name: "index_items_on_price"
   end
 
 end
