@@ -1,6 +1,11 @@
 <h1>Create item</h1>
 
-<form action="/items" method="post">
-  <input type="text" name="title"/>
-  <input type="submit" name="Submit"/>
-</form>
+<%= form_for @item do |f| %>
+  <p>Price<br><%= f.text_field :price %></p>
+  <p>Name<br><%= f.text_field :name %></p>
+  <p>Descr<br><%= f.text_field :description %></p>
+  <p>Weight<br><%= f.text_field :weight %></p>
+  <p>
+    <%= f.submit "Change item" %>
+  </p>
+<% end %>
