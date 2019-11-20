@@ -1,13 +1,23 @@
 class ItemsController < ApplicationController
 
+  # before actions is like decorators in Django
+  # can create is_admin filter for instance
+  before_action :find_item, only: [:edit, :update, :destroy, :upvote]
+  before_action :check_if_admin, only: [:edit]
+
   def index
     @items = Item.all
-    # render plain: @items.map { |i| "#{i.name}: #{i.price}"  }.join("\n")
+  end
+
+  def hot
+    @items =Item.where("votes_count > 10")
+    puts @items
+    render "index"
   end
 
   def show
     unless (@item = Item.where(id: params[:id]).first)
-      render plain: "Page not found", status: 404
+      render_404
     end
   end
 
@@ -31,7 +41,7 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item = Item.find(params[:id])
+    # @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to @item
     else
@@ -40,18 +50,32 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
+    # @item = Item.find(params[:id])
   end
 
   def destroy
-    @item = Item.find(params[:id])
+    # @item = Item.find(params[:id])
     @item.destroy
-    redirect_to item_path
+    redirect_to '/items'
   end
+
+  def upvote
+    @item.increment!(:votes_count)
+    redirect_to action: :index
+  end
+
 
   private
     def item_params
       params.require("item").permit(:price, :description, :weight, :name)
     end
+
+    def find_item
+      @item = Item.where(id: params[:id]).first
+      unless @item
+        render_404
+      end
+    end
+
 
 end

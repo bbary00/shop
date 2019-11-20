@@ -5,9 +5,12 @@ class Item < ApplicationRecord
                                     allow_nil: true}}
   validates :name, :description, presence: true
 
-  after_initialize {puts "initialiezed"}
-  after_save {puts "saved"}
-  after_create {puts "created"}
-  after_update { puts "updated"}
-  after_destroy { puts "destroyed"}
+  after_initialize { puts "initialiezed" }
+  after_save { puts "saved" }
+  after_create { puts "created" }
+  after_update { puts "updated" }
+  after_destroy { puts "destroyed" }
+
+  has_many :positions
+  has_many :carts, through: :positions
 end

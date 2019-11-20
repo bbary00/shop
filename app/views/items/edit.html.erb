@@ -1,3 +1,4 @@
+<%= link_to "Home", items_path(@item.id) %>
 <h1>Edit item</h1>
 
 <%= form_for @item do |f| %>
@@ -6,6 +7,6 @@
   <p>Descr<br><%= f.text_field :description %></p>
   <p>Weight<br><%= f.text_field :weight %></p>
   <p>
-    <%= f.submit "Create item" %>
+    <%= f.submit "Edit item" %>
   </p>
 <% end %>

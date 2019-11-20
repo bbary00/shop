@@ -1,4 +1,6 @@
 <h1>Items</h1>
+<button ><%= link_to "Add new item", new_item_path %></button>
+<hr>
 
 <% if @items.empty? %>
   <b>No items in store</b>
@@ -9,6 +11,7 @@
       <th>Name</th>
       <th>Price</th>
       <th></th>
+      <th>Rate</th>
     </tr>
 
   <% @items.each do |i| %>
@@ -17,6 +20,7 @@
       <td><%= link_to i.name, i %></td>
       <td><%= i.price %></td>
       <td><%= link_to "[X]", i, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= i.votes_count %><%= link_to "/\\", upvote_item_path(i) %></td>
     </tr>
   <% end %>
   </table>

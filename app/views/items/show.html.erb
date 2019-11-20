@@ -1,6 +1,9 @@
+<%= link_to "Home", items_path(@item.id) %>
+
 <h2><%= @item.name %></h2>
 <ul>
   <li><%= @item.price %></li>
   <li><%= @item.description %></li>
   <li><%= @item.weight %></li>
 </ul>
+<button ><%= link_to "Edit item", edit_item_path(@item.id) %></button>
